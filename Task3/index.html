@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roselle 🌷</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #faf9f7;
+            color: #292733;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 230px;
+            height: 100vh;
+
+            background: #29243d;
+            color: white;
+
+            padding: 35px 22px;
+            z-index: 1000;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 1px;
+            margin-bottom: 60px;
+        }
+
+        .logo span {
+            color: #e8b4cb;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: #ddd8e8;
+
+            padding: 13px 16px;
+            margin: 8px 0;
+
+            border-radius: 12px;
+
+            transition: 0.3s;
+        }
+
+        .sidebar nav a:hover {
+            background: #4a4164;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .side-bottom {
+            margin-top: auto;
+            text-align: center;
+            font-size: 13px;
+            color: #aaa3b8;
+            line-height: 1.6;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .content {
+            margin-left: 230px;
+        }
+
+        section {
+            padding: 90px 8%;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 80% 20%,
+                #fbcfe8 0,
+                transparent 28%),
+
+                radial-gradient(circle at 20% 80%,
+                #c7d2fe 0,
+                transparent 30%),
+
+                linear-gradient(
+                    135deg,
+                    #fff8fb,
+                    #f4f3ff
+                );
+        }
+
+        .hero-content {
+            max-width: 850px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            display: inline-block;
+
+            padding: 8px 18px;
+            margin-bottom: 25px;
+
+            background: rgba(255,255,255,0.7);
+            border: 1px solid #eaddea;
+            border-radius: 50px;
+
+            color: #765b7d;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 7vw, 82px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+
+            color: #29243d;
+        }
+
+        .hero h1 span {
+            color: #b76e92;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+
+            font-size: 18px;
+            line-height: 1.8;
+
+            color: #686273;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            padding: 13px 25px;
+            margin: 5px;
+
+            border-radius: 30px;
+
+            background: #29243d;
+            color: white;
+
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-4px);
+            background: #4a4164;
+        }
+
+        .hero-btn.secondary {
+            background: white;
+            color: #29243d;
+            border: 1px solid #ddd6e5;
+        }
+
+        /* Decorative circles */
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: 0.5;
+        }
+
+        .circle.one {
+            width: 180px;
+            height: 180px;
+            background: #f7c7dc;
+            top: 10%;
+            right: 10%;
+        }
+
+        .circle.two {
+            width: 130px;
+            height: 130px;
+            background: #c7d2fe;
+            bottom: 12%;
+            left: 8%;
+        }
+
+
+        /* ================= COMMON ================= */
+
+        .section-title {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 12px;
+            color: #29243d;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777180;
+            margin-bottom: 45px;
+        }
+
+
+        /* ================= PRODUCT ================= */
+
+        #product {
+            background: #fff;
+        }
+
+        .product-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .product-card {
+            width: 330px;
+
+            /* BOX MODEL */
+            margin: 10px;
+            padding: 18px;
+            border: 1px solid #e4dfe6;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow: 0 15px 40px rgba(48, 38, 61, 0.1);
+
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(48, 38, 61, 0.15);
+        }
+
+        .product-image {
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+
+            padding: 6px 12px;
+
+            background: white;
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding-top: 18px;
+        }
+
+        .product-info h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            color: #777180;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 13px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #29243d;
+            color: white;
+
+            cursor: pointer;
+            font-size: 15px;
+
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #b76e92;
+        }
+
+
+        /* ================= BLOG ================= */
+
+        #blog {
+            background: #f6f4f8;
+        }
+
+        .blog-container {
+            display: flex;
+            gap: 25px;
+        }
+
+        .blog-card {
+            flex: 1;
+
+            background: white;
+
+            border: 1px solid #e8e3eb;
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow: 0 8px 25px rgba(40, 30, 50, 0.06);
+
+            transition: 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(40, 30, 50, 0.1);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 22px;
+        }
+
+        .blog-content span {
+            font-size: 12px;
+            color: #b76e92;
+            font-weight: bold;
+        }
+
+        .blog-content h3 {
+            margin: 10px 0;
+            font-size: 21px;
+        }
+
+        .blog-content p {
+            color: #777180;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .read-more {
+            text-decoration: none;
+            color: #29243d;
+            font-weight: bold;
+        }
+
+
+        /*CONTACT */
+
+        #contact {
+            min-height: 60vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background: #29243d;
+            color: white;
+        }
+
+        #contact h2 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        #contact p {
+            color: #c9c4d2;
+            font-size: 17px;
+        }
+
+
+        /*MOBILE */
+
+        @media (max-width: 768px) {
+
+            .sidebar {
+                position: relative;
+
+                width: 100%;
+                height: auto;
+
+                padding: 20px;
+
+                display: block;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .sidebar nav a {
+                display: inline-block;
+                margin: 3px;
+                padding: 9px 12px;
+            }
+
+            .side-bottom {
+                display: none;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            section {
+                padding: 70px 20px;
+            }
+
+            .hero {
+                min-height: 85vh;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .blog-container {
+                flex-direction: column;
+            }
+
+            .blog-card {
+                width: 100%;
+            }
+
+            #contact h2 {
+                font-size: 35px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!--SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Roselle 🌷<span>.</span>
+        </div>
+
+        <nav>
+            <a href="#home">⌂ &nbsp; Home</a>
+            <a href="#product">✦ &nbsp; Product</a>
+            <a href="#blog">◈ &nbsp; Blog</a>
+            <a href="#contact">♡ &nbsp; Contact</a>
+        </nav>
+
+        <div class="side-bottom">
+            ♡ Memories
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="content">
+
+
+        <!-- HERO -->
+
+        <section class="hero" id="home">
+
+            <div class="circle one"></div>
+            <div class="circle two"></div>
+
+            <div class="hero-content">
+
+                <div class="hero-tag">
+                    ✦ Welcome to my creative space
+                </div>
+
+                <h1>
+                    Create. Explore.<br>
+                    <span>Inspire.</span>
+                </h1>
+
+                <p>
+                    A beautiful collection of ideas, products and
+                    stories — designed with simplicity, creativity
+                    and a little bit of magic.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#product" class="hero-btn">
+                        Explore Product
+                    </a>
+
+                    <a href="#blog" class="hero-btn secondary">
+                        Read Stories
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRODUCT -->
+
+        <section id="product">
+
+            <h2 class="section-title">
+                Featured Product
+            </h2>
+
+            <p class="section-subtitle">
+                Simple design, beautiful details.
+            </p>
+
+
+            <div class="product-wrapper">
+
+                <div class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRzHHtZIxkQlmSU1aZsfow_yeXcY2CKJWsrPGiHK1Pr7G_kwrv6S1_Ah9kP5_Z2eRHKve2CaKI6Q910U7XLeyZ8jOKvmFeDbA"
+                            alt="Poster"
+                        >
+
+                        <span class="badge">
+                            New
+                        </span>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <h3>Pastel Memories🎀</h3>
+
+                        <p>
+                            A charming collection of nostalgic pictures, sweet messages, flowers, and pink-toned memories💗✨
+                        </p>
+
+                        <div class="price">
+                            ₹499
+                        </div>
+
+                        <button class="buy-btn">
+                            Buy Now
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BLOG -->
+
+        <section id="blog">
+
+            <h2 class="section-title">
+                From The Blog
+            </h2>
+
+            <p class="section-subtitle">
+                Little ideas that make a big difference.
+            </p>
+
+
+            <div class="blog-container">
+
+
+                <article class="blog-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1499750310107-5fef28a66643"
+                        alt="Study"
+                    >
+
+                    <div class="blog-content">
+
+                        <span>PRODUCTIVITY</span>
+
+                        <h3>
+                            Study Smarter, Not Harder
+                        </h3>
+
+                        <p>
+                            Simple ways to make your study sessions
+                            more focused and productive.
+                        </p>
+
+                        <a href="#" class="read-more">
+                            Read More →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="blog-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+                        alt="Technology"
+                    >
+
+                    <div class="blog-content">
+
+                        <span>TECHNOLOGY</span>
+
+                        <h3>
+                            The Future Is Digital
+                        </h3>
+
+                        <p>
+                            Exploring how technology is changing
+                            the way we learn, create and connect.
+                        </p>
+
+                        <a href="#" class="read-more">
+                            Read More →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="blog-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32"
+                        alt="Creativity"
+                    >
+
+                    <div class="blog-content">
+
+                        <span>CREATIVITY</span>
+
+                        <h3>
+                            Make Space For Creativity
+                        </h3>
+
+                        <p>
+                            Discover small habits that can help
+                            you think creatively every day.
+                        </p>
+
+                        <a href="#" class="read-more">
+                            Read More →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+
+        <section id="contact">
+
+            <div>
+
+                <h2>
+                    Designed with<br>
+            creativity & curiosity ✦
+                </h2>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</body>
+</html>
