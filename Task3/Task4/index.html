@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌌Space Explorer</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #07182b;
+            color: white;
+        }
+
+        /* Navbar */
+        nav {
+            min-height: 75px;
+            background: #0f2a44;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 4%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ffd27a;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: #e6f4ff;
+            text-decoration: none;
+            font-size: 18px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff9f5a;
+            transform: scale(1.15);
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 515px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px 3.2%;
+            gap: 30px;
+            background: #0b2038;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .tagline {
+            color: #ff9f5a;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: clamp(38px, 4vw, 64px);
+            margin-bottom: 20px;
+        }
+
+        h1 span {
+            color: #5ce1e6;
+        }
+
+        .description {
+            font-size: 22px;
+            color: #d3e6f5;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 17px 30px;
+            background: #1fa2b8;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.4s;
+        }
+
+        .btn:hover {
+            background: #ff8a3d;
+            transform: scale(1.08) rotate(-2deg);
+        }
+
+        /* Astronaut and rocket */
+        .space-art {
+            width: 285px;
+            height: 285px;
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #163a5c;
+            margin-right: 11%;
+            transition: transform 0.5s;
+        }
+
+        .space-art:hover {
+            transform: scale(1.08);
+        }
+
+        .astronaut {
+            position: relative;
+            z-index: 2;
+            font-size: 100px;
+            animation: float 3s ease-in-out infinite;
+            transition: transform 0.5s;
+        }
+
+        .space-art:hover .astronaut {
+            transform: rotate(12deg) scale(1.15) skew(3deg);
+        }
+
+        .rocket-orbit {
+            position: absolute;
+            width: 235px;
+            height: 235px;
+            border: 2px dashed #5ce1e6;
+            border-radius: 50%;
+            animation: orbit 5s linear infinite;
+        }
+
+        .rocket {
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            line-height: 1;
+            font-size: 42px;
+            filter: drop-shadow(0 0 8px #ff9f5a);
+            animation: rocketPulse 1.5s ease-in-out infinite;
+        }
+
+        /* Universe */
+        .universe {
+            padding: 62px 3.2%;
+            text-align: center;
+            scroll-margin-top: 85px;
+        }
+
+        .universe h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #ffd27a;
+        }
+
+        .universe > p {
+            font-size: 20px;
+            color: #c2dcef;
+            margin-bottom: 35px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            padding: 35px 20px;
+            background: #0f2a44;
+            border: 1px solid #2d5a82;
+            border-radius: 10px;
+            transition: 0.5s;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) rotate(1deg) scale(1.03);
+            background: #174468;
+        }
+
+        .card .icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #ff9f5a;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #d3e6f5;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #0f2a44;
+            color: #d3e6f5;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-14px) rotate(5deg);
+            }
+        }
+
+        @keyframes orbit {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rocketPulse {
+            0%, 100% {
+                scale: 1;
+            }
+
+            50% {
+                scale: 1.15;
+            }
+        }
+
+        /* Mobile hamburger navbar */
+        @media (max-width: 750px) {
+            nav {
+                flex-wrap: wrap;
+                padding: 18px 20px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .menu-icon {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                cursor: pointer;
+            }
+
+            .menu-icon span {
+                width: 28px;
+                height: 3px;
+                background: #ffd27a;
+                border-radius: 5px;
+                transition: 0.3s;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                gap: 22px;
+                width: 100%;
+                padding: 25px 0 10px;
+            }
+
+            #menu-toggle:checked ~ .nav-links {
+                display: flex;
+            }
+
+            /* Three lines become a cross */
+            #menu-toggle:checked + .menu-icon span:first-child {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            #menu-toggle:checked + .menu-icon span:nth-child(2) {
+                opacity: 0;
+            }
+
+            #menu-toggle:checked + .menu-icon span:last-child {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 55px 20px;
+            }
+
+            .space-art {
+                width: 250px;
+                height: 250px;
+                margin: 35px 0 10px;
+            }
+
+            .rocket-orbit {
+                width: 205px;
+                height: 205px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .description {
+                font-size: 18px;
+            }
+
+            .universe h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🌌 Space Explorer</div>
+
+        <input type="checkbox" id="menu-toggle">
+
+        <label for="menu-toggle" class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#universe">Universe</a>
+            <a href="#missions">Missions</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="tagline">DISCOVER THE UNKNOWN</p>
+
+            <h1>Explore The <span>Universe</span></h1>
+
+            <p class="description">
+                Discover planets, stars and galaxies beyond our imagination.
+            </p>
+
+            <a href="#universe" class="btn">Start Exploring</a>
+        </div>
+
+        <div class="space-art">
+            <div class="rocket-orbit">
+                <div class="rocket">🚀</div>
+            </div>
+
+            <div class="astronaut">👨‍🚀</div>
+        </div>
+    </section>
+
+    <section class="universe" id="universe">
+        <h2>Explore The Universe</h2>
+
+        <p>Space is full of mysteries waiting to be discovered.</p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="icon">🌍</div>
+                <h3>Planets</h3>
+                <p>Explore fascinating planets and their unique worlds.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⭐</div>
+                <h3>Stars</h3>
+                <p>Discover shining stars and distant galaxies.</p>
+            </div>
+
+            <div class="card" id="missions">
+                <div class="icon">🚀</div>
+                <h3>Space Missions</h3>
+                <p>Travel through space and discover new possibilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        © 2026 Space Explorer | Keep Exploring 🚀
+    </footer>
+
+</body>
+</html>
