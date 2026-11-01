@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log("Armstrong numbers between 100 and 999:");
+        for (let i = 100; i <= 999; i++) {
+            let temp = i;
+            let s = 0;
+            while (temp > 0) {
+                let d = temp % 10;
+                s = s + d * d * d;
+                temp = Math.floor(temp / 10);
+            }
+            if (s === i) {
+                console.log(i);
+            }
+        }
+
+
+        console.log("Multiplication Table");
+        for (let i = 1; i <= 5; i++) {
+            console.log("Multiplication Table of " + i);
+            for (let j = 1; j <= 10; j++) {
+                console.log(i + " x " + j + " = " + (i * j));
+            }
+            console.log("----------------");
+        }
+
+        console.log("Prime numbers between 1 and 100:");
+        for (let num = 2; num <= 100; num++) {
+            let isPrime = true;
+            for (let i = 2; i < num; i++) {
+                if (num % i === 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) {
+                console.log(num);
+            }
+        }
+
+        console.log("Print each character of a string using for loop:");
+        let str = prompt("Enter input:");
+        for (let i = 0; i < str.length; i++) {
+            console.log(str[i]);
+        }
+
+        console.log("Check if a number is a palindrome:");
+        let num = 12321;
+let original = num;
+let reverse = 0;
+
+while (num > 0) {
+    let digit = num % 10;
+    reverse = reverse * 10 + digit;
+    num = Math.floor(num / 10);
+}
+
+if (original === reverse) {
+    console.log(original + " is a palindrome.");
+} else {
+    console.log(original + " is not a palindrome.");
+}
+    </script>
+</body>
+
+</html>
